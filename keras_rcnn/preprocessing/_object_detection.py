@@ -54,14 +54,14 @@ class DictionaryIterator(keras.preprocessing.image.Iterator):
 
         if self.color_mode == "grayscale":
             if self.data_format == "channels_first":
-                self.image_shape = (*target_size, 1)
+                self.image_shape = tuple(list(target_size) +  [1])
             else:
-                self.image_shape = (1, *target_size)
+                self.image_shape = tuple([1] + list(target_size))
         else:
             if self.data_format == "channels_last":
-                self.image_shape = (*target_size, 3)
+                self.image_shape = tuple(list(target_size) +  [3])
             else:
-                self.image_shape = (3, *target_size)
+                self.image_shape = tuple([3] + list(target_size))
 
         self.mask_size = mask_size
 
